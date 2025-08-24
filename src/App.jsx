@@ -1,37 +1,41 @@
 import React from "react";
-import Login from "./pages/Login";
-import { Layout } from "lucide-react";
 import {
   BrowserRouter as Router,
-  Route,
   Routes,
+  Route,
   Navigate,
 } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
+import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
-        <Routes>
-          {/* Redirect root to /login */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
-          {/* Public route */}
-          <Route path="/login" element={<Login />} />
+        {/* Protected Routes wrapped with Layout */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <Layout /> {/* Layout wrapper */}
+            </ProtectedRoute>
+          }
+        >
+          {/* Nested routes rendered inside Layout via <Outlet /> */}
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/* Add more protected pages here */}
+        </Route>
 
-          {/* Protected route */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
+        {/* Catch-all redirect */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
     </Router>
   );
 };
