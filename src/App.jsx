@@ -12,6 +12,7 @@ import BMICalculator from "./pages/BMICalculator.jsx";
 import CalorieCalculator from "./pages/CalorieCalculator.jsx";
 import ProteinCalculator from "./pages/ProteinCalculator.jsx";
 import DietPlan from "./pages/DietPlan.jsx";
+import FitnessDetails from "./pages/FitnessDetails.jsx";
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                 {/* Unauthenticated route */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/fitness-details" element={<FitnessDetails />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
 
 

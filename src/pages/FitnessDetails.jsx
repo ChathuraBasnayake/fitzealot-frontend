@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const FitnessDetails = () => {
     const [formData, setFormData] = useState({
@@ -81,6 +81,8 @@ const FitnessDetails = () => {
             alert('Failed to save fitness details: ' + (error.response?.data?.message || error.message));
         }
     };
+
+    const navigate = useNavigate();
 
     return (
         <div className="flex flex-col md:flex-row h-screen bg-gray-50 font-sans">
@@ -201,8 +203,9 @@ const FitnessDetails = () => {
                         <button
                             type="submit"
                             className="w-full flex justify-center py-3 px-4 rounded-lg shadow-lg text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                        onClick={() => navigate("/login")}
                         >
-                            Save Details
+                            Save and Create User
                         </button>
                     </form>
 
